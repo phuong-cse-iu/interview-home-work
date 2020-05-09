@@ -1,9 +1,9 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 import { Badge } from 'reactstrap';
-import { formatDate } from '../../utils/dateTimeFormat';
 import users from '../../data/users.json';
-import textEllipsis from '../../utils/textEllipsis';
+import { formatDate } from '../../utils/date/dateTimeFormat';
+import textEllipsis from '../../utils/text/textEllipsis';
 
 const PostTitle = styled.h4`
   text-align: center;
