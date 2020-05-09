@@ -19,7 +19,7 @@ const Home = ({ posts, fetchPosts, isLoading, error }) => {
 
   return (
     <ContentBlock>
-      <Alert color="danger" message="Post fields required" />
+      {/* <Alert color="danger" message="Post fields required" /> */}
       <SearchBar placeholder="Search posts" />
       <Button type="button" color="primary" onClick={handleClick}>
         {showAddForm ? 'Hide form' : 'Click to add post'}

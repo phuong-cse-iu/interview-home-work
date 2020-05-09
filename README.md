@@ -76,3 +76,20 @@
 - Additional information
   - You can use pre-defined json data as a reference
   - NodeJS & ExpressJS boilerplate or other is accepted
+
+## How to run
+### Install packages
+- Browse to backend folder:
+  - npm install
+- Browse to my-assignment folder:
+  - npm install
+### Start back-end side
+- Browse to backend folder
+  - npm start
+### Start front-end side
+- Browse to my-assignment folder
+  - npm start
+### Note:
+- Backend server is hosted on port 5000
+  - posts route: localhost:5000/api/v1/posts
+- Frontend is hosted on port
