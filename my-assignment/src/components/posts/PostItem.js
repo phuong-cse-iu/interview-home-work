@@ -2,14 +2,17 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Badge } from "reactstrap";
 import { formatDate } from "../../utils/dateTimeFormat";
+import users from '../../data/users.json';
 
 const PostTitle = styled.h4`
   text-align: center;
 `;
 
 const PostContainer = styled.div`
+  border-bottom: 1px solid gray;
   display: flex;
   flex-direction: column;
+  margin-top: 4px;
 `;
 
 const PostInfo = styled.div`
@@ -24,11 +27,11 @@ const PostDetails = styled.div`
 `;
 
 const PostTags = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  flex-basis: 50%;
-  justify-content: flex-end;
   align-items: baseline;
+  display: flex;
+  flex-basis: 50%;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 `;
 
 const Author = styled.div`
@@ -37,14 +40,17 @@ const Author = styled.div`
 
 const CreatedAt = styled.div``;
 
+const findOwner = id => users.find(user => user.id === id);
+
 export default ({post}) => {
   const {title, owner, content, created_at, tags} = post;
+  const {username} = findOwner(owner);
   return (
     <PostContainer>
       <PostTitle>{title}</PostTitle>
       <PostInfo>
         <PostDetails>
-          <Author>Author: Adam Levine</Author>
+          <Author>Author: {username}</Author>
           <CreatedAt>Created at: {formatDate(created_at)}</CreatedAt>
         </PostDetails>
         <PostTags>
