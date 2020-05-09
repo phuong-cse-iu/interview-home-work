@@ -1,0 +1,1 @@
+export const dbConnection = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0-kxb0n.mongodb.net/test?retryWrites=true&w=majority`;

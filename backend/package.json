@@ -1,0 +1,47 @@
+{
+  "name": "psyduckbot",
+  "version": "1.0.0",
+  "description": "A cute bot with deleting branche capability",
+  "main": "index.js",
+  "scripts": {
+    "start": "node -r dotenv/config ./src/server.js dotenv_config_path=.env",
+    "start:dev": "cross-env nodemon --exec babel-node -r dotenv/config ./src/index.js dotenv_config_path=.env.local",
+    "test": "jest",
+    "test:dev": "jest --watch"
+  },
+  "author": "phuongcseiu",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "babel-plugin-transform-assets": "^1.0.2",
+    "babel-plugin-transform-dynamic-import": "^2.1.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "cron": "^1.8.2",
+    "debug": "~2.6.9",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.28",
+    "mongoose": "^5.9.5",
+    "node-cron": "^2.0.3",
+    "pm2": "4.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-arrow-functions": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/register": "^7.9.0",
+    "@babel/runtime": "^7.8.4",
+    "babel-plugin-dynamic-import-node": "^2.3.0",
+    "cross-env": "^6.0.3",
+    "jest": "^25.1.0",
+    "jest-emotion": "^10.0.27",
+    "nodemon": "^2.0.2",
+    "rimraf": "^3.0.2"
+  }
+}
