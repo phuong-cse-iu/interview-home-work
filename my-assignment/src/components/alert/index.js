@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { UncontrolledAlert, Alert } from 'reactstrap';
+import React from 'react';
+import { Alert } from 'reactstrap';
 
-export default ({message,color, ...props}) => {
-  const [visible, setVisible] = useState(true);
+const CustomAlert = ({
+  message,
+  color,
+  alertVisible,
+  onDimiss,
+  ...props
+}) => (
+  <Alert color={color} isOpen={alertVisible} toggle={onDimiss} {...props}>
+    {message}
+  </Alert>
+);
 
-  const onDismiss = () => setVisible(false);
-
-  return (
-    <div>
-      <UncontrolledAlert color={color} isOpen={visible} toggle={onDismiss} fade={false}>
-        {message}
-      </UncontrolledAlert>
-    </div>
-  );
-};
+export default CustomAlert;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
-import Alert from '../../components/alert';
+import Alert from '../../containers/alert';
 import ContentBlock from '../../components/content-block';
 import Posts from '../../components/posts';
 import { POST } from '../../constants';
@@ -19,7 +19,9 @@ const Home = ({ posts, fetchPosts, isLoading, error }) => {
 
   return (
     <ContentBlock>
-      {/* <Alert color="danger" message="Post fields required" /> */}
+      {error.message && error.message.length > 0 && (
+        <Alert color={error.color} message={error.message} />
+      )}
       <SearchBar placeholder="Search posts" />
       <Button type="button" color="primary" onClick={handleClick}>
         {showAddForm ? 'Hide form' : 'Click to add post'}
@@ -36,7 +38,9 @@ const mapStateToProps = ({ isLoading, postsData, error, filter }) => ({
     ? postsData.posts.filter(
         (post) =>
           post.title.toLowerCase().includes(filter.toLowerCase()) ||
-          post.tags.some((tag) => tag.toLowerCase().includes(filter))
+          post.tags.some((tag) =>
+            tag.toLowerCase().includes(filter.toLowerCase())
+          )
       )
     : postsData.posts,
   error,

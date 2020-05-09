@@ -8,3 +8,9 @@ export const POST = {
   SEARCH_POST: 'SEARCH_POST',
   SEARCH_POST_ASYNC: 'SEARCH_POST_ASYNC',
 };
+
+export const FORM = {
+  ERROR: 'ERROR',
+  ERROR_ASYNC: 'ERROR_ASYNC',
+  CLEAR_ERROR: 'CLEAR_ERROR',
+}

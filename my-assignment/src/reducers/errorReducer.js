@@ -1,12 +1,11 @@
-import { POST } from "../constants";
+import { FORM } from "../constants";
 
-const errorReducer = (state = null, action) => {
+const errorReducer = (state = {message: ''}, action) => {
   switch (action.type) {
-    case POST.LOAD_FAILED:
-      return action.error;
-    case POST.LOADING:
-    case POST.LOAD_SUCCESS:
-      return null;
+    case FORM.ERROR:
+      return action.payload;
+    case FORM.CLEAR_ERROR:
+      return '';
     default:
       return state;
   }
