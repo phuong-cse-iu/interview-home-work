@@ -33,15 +33,17 @@ const Home = ({ posts, fetchPosts, isLoading, error }) => {
 const mapStateToProps = ({ isLoading, postsData, error, filter }) => ({
   isLoading,
   posts: filter
-    ? postsData.posts.filter((post) =>
-        post.title.toLowerCase().includes(filter.toLowerCase())
+    ? postsData.posts.filter(
+        (post) =>
+          post.title.toLowerCase().includes(filter.toLowerCase()) ||
+          post.tags.some((tag) => tag.toLowerCase().includes(filter))
       )
     : postsData.posts,
   error,
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchPosts: () => dispatch({type: POST.FETCH_POST})
-})
+const mapDispatchToProps = (dispatch) => ({
+  fetchPosts: () => dispatch({ type: POST.FETCH_POST }),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -6,7 +6,7 @@ import { POST } from "../constants";
 function* handleFetchPosts() {
     try {
         const posts = yield call(fetchPost);
-        yield put({type: POST.LOAD_SUCCESS, posts: posts});
+        yield put(setPosts(posts));
     } catch (error) {
         // dispatch error
         yield put(setError(error.toString()));

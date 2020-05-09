@@ -1,8 +1,10 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { Badge } from 'reactstrap';
+import colors from '../../constants/colors';
 import users from '../../data/users.json';
 import { formatDate } from '../../utils/date/dateTimeFormat';
+import getRandomPosition from '../../utils/number';
 import textEllipsis from '../../utils/text/textEllipsis';
 
 const PostTitle = styled.h4`
@@ -54,14 +56,7 @@ export default ({ post }) => {
           <CreatedAt>Created at: {formatDate(created_at)}</CreatedAt>
         </PostDetails>
         <PostTags>
-          <Badge color="primary">Primary</Badge>
-          <Badge color="secondary">Secondary</Badge>
-          <Badge color="success">Success</Badge>
-          <Badge color="danger">Danger</Badge>
-          <Badge color="warning">Warning</Badge>
-          <Badge color="info">Info</Badge>
-          <Badge color="light">Light</Badge>
-          <Badge color="dark">Dark</Badge>
+          {tags.map(tag => <Badge color={colors[getRandomPosition(colors.length)]}>{tag}</Badge>)}
         </PostTags>
       </PostInfo>
       <p>{postContent}</p>

@@ -5,7 +5,7 @@ const loadPosts = () => ({
 });
 
 const setPosts = (posts) => ({
-  type: POST.FETCH_POST,
+  type: POST.LOAD_SUCCESS,
   posts,
 });
 
