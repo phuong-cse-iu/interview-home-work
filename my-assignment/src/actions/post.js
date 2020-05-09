@@ -17,10 +17,11 @@ const setError = (error) => ({
 const addPost = post => ({
   type: POST.ADD_POST,
   post
-})
+});
 
 export {
   loadPosts,
   setPosts,
   setError,
+  addPost
 };

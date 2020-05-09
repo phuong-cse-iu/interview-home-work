@@ -1,17 +1,18 @@
-import Home from './pages/home';
-import Layout from './components/layout';
 import React from 'react';
-import configureStore from './store';
 import { Provider } from 'react-redux';
-
-const store = configureStore();
+import { PersistGate } from 'redux-persist/integration/react';
+import Layout from './components/layout';
+import Home from './pages/home';
+import { store, persistor } from './store';
 
 function App() {
   return (
     <Provider store={store}>
-      <Layout>
-        <Home />
-      </Layout>
+      <PersistGate persistor={persistor}>
+        <Layout>
+          <Home />
+        </Layout>
+      </PersistGate>
     </Provider>
   );
 }

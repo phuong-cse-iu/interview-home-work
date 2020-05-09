@@ -1,8 +1,9 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { Badge } from "reactstrap";
-import { formatDate } from "../../utils/dateTimeFormat";
+import React from 'react';
+import styled from '@emotion/styled';
+import { Badge } from 'reactstrap';
+import { formatDate } from '../../utils/dateTimeFormat';
 import users from '../../data/users.json';
+import textEllipsis from '../../utils/textEllipsis';
 
 const PostTitle = styled.h4`
   text-align: center;
@@ -34,17 +35,16 @@ const PostTags = styled.div`
   justify-content: flex-end;
 `;
 
-const Author = styled.div`
-
-`;
+const Author = styled.div``;
 
 const CreatedAt = styled.div``;
 
-const findOwner = id => users.find(user => user.id === id);
+const findOwner = (id) => users.find((user) => user.id === id);
 
-export default ({post}) => {
-  const {title, owner, content, created_at, tags} = post;
-  const {username} = findOwner(owner);
+export default ({ post }) => {
+  const { title, owner, content, created_at, tags } = post;
+  const postContent = textEllipsis(content);
+  const { username = '' } = findOwner(owner) || {};
   return (
     <PostContainer>
       <PostTitle>{title}</PostTitle>
@@ -64,8 +64,7 @@ export default ({post}) => {
           <Badge color="dark">Dark</Badge>
         </PostTags>
       </PostInfo>
-      <p> {content}</p>
+      <p>{postContent}</p>
     </PostContainer>
   );
 };
-
