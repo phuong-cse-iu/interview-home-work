@@ -42,7 +42,7 @@ const CreatedAt = styled.div``;
 const findOwner = (id) => users.find((user) => user.id === id);
 
 export default ({ post }) => {
-  const { title, owner, content, created_at, tags } = post;
+  const { title, owner, content = '', created_at, tags } = post || {};
   const postContent = textEllipsis(content);
   const { username = '' } = findOwner(owner) || {};
   return (

@@ -1,14 +1,18 @@
-import { put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { setError, setPosts } from '../actions/post';
+import { fetchPost } from '../api';
 import { POST } from "../constants";
 
-function* handleAddPost(data) {
-    // yield put(addPost(post));
-    const newPost = {...data.post, id: '1', owner: 1};
-    console.log('new post', newPost);
-    yield put({type: POST.ADD_POST_ASYNC, post: newPost});
-    // return newPost;
+function* handleFetchPosts() {
+    try {
+        const posts = yield call(fetchPost);
+        yield put({type: POST.LOAD_SUCCESS, posts: posts});
+    } catch (error) {
+        // dispatch error
+        yield put(setError(error.toString()));
+    }
 }
 
-export default function* watchAddPost() {
-    yield takeEvery(POST.ADD_POST, handleAddPost);
+export default function* watchPosts() {
+    yield takeEvery(POST.FETCH_POST, handleFetchPosts);
 }

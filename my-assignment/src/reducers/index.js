@@ -4,17 +4,19 @@ import storage from 'redux-persist/lib/storage';
 import loadingReducer from './loadingReducer';
 import errorReducer from './errorReducer';
 import postsReducer from './postsReducer';
+import filteredReducer from './filteredReducer';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['posts'],
+  whitelist: ['postsData'],
 }
 
 const rootReducer = combineReducers({
   isLoading: loadingReducer,
   error: errorReducer,
-  posts: postsReducer,
+  postsData: postsReducer,
+  filter: filteredReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);

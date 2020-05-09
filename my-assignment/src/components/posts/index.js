@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import postsData from '../../data/posts.json';
+import React from 'react';
 import PostItem from './PostItem';
 
 export default ({posts, ...props}) => {
-  // const [posts, setPosts] = useState(postsData);
-  console.log('posts', posts);
   return (
     <div>
       {posts && posts.length > 0 && posts.map((post) => (

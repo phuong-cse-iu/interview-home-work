@@ -5,7 +5,7 @@ const loadPosts = () => ({
 });
 
 const setPosts = (posts) => ({
-  type: POST.LOAD_SUCCESS,
+  type: POST.FETCH_POST,
   posts,
 });
 
@@ -19,9 +19,15 @@ const addPost = post => ({
   post
 });
 
+const searchPost = name => ({
+  type: POST.SEARCH_POST,
+  name
+});
+
 export {
   loadPosts,
   setPosts,
   setError,
-  addPost
+  addPost,
+  searchPost,
 };

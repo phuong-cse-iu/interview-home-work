@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
-import Posts from '../../components/posts';
-import Comments from '../../components/comments';
-import ContentBlock from '../../components/content-block';
-import SearchBar from '../../components/search-bar';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
-import AddPost from '../../containers/posts/AddPost';
 import Alert from '../../components/alert';
+import ContentBlock from '../../components/content-block';
+import Posts from '../../components/posts';
+import { POST } from '../../constants';
+import AddPost from '../../containers/posts/AddPost';
+import SearchBar from '../../containers/search-bar';
 
-const Home = ({posts, isLoading, error}) => {
+const Home = ({ posts, fetchPosts, isLoading, error }) => {
   const [showAddForm, setShowAddForm] = useState(false);
 
-  const handleClick = e => setShowAddForm(!showAddForm);
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const handleClick = (e) => setShowAddForm(!showAddForm);
 
   return (
     <ContentBlock>
@@ -22,15 +26,22 @@ const Home = ({posts, isLoading, error}) => {
       </Button>
       {showAddForm && <AddPost />}
       <Posts posts={posts} />
-      {/* <Comments /> */}
     </ContentBlock>
   );
 };
 
-const mapStateToProps = ({ isLoading, posts, error }) => ({
+const mapStateToProps = ({ isLoading, postsData, error, filter }) => ({
   isLoading,
-  posts,
+  posts: filter
+    ? postsData.posts.filter((post) =>
+        post.title.toLowerCase().includes(filter.toLowerCase())
+      )
+    : postsData.posts,
   error,
 });
 
-export default connect(mapStateToProps, null)(Home);
+const mapDispatchToProps = dispatch => ({
+  fetchPosts: () => dispatch({type: POST.FETCH_POST})
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

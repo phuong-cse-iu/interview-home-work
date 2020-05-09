@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default ({method, url, params, cancelToken}) => axios({
+export default (method, url, params, cancelToken) => axios({
     method,
     url,
     params,
