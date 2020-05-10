@@ -1,0 +1,1 @@
+export const POST_URI = `${process.env.REACT_APP_BASE_URL}/posts`;

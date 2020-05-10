@@ -1,8 +1,9 @@
 import request from '../utils/http';
 import posts from '../data/posts.json';
+import {POST_URI} from '../constants/url';
 
 const fetchPost = async () => {
-  const response = await request('http://localhost:5000/api/v1/posts/', {
+  const response = await request(POST_URI, {
     method: 'GET',
   });
   const data = response && response.data;
