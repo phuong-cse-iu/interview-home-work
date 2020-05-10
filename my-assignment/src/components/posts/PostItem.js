@@ -56,7 +56,7 @@ export default ({ post }) => {
           <CreatedAt>Created at: {formatDate(created_at)}</CreatedAt>
         </PostDetails>
         <PostTags>
-          {tags.map(tag => <Badge color={colors[getRandomPosition(colors.length)]}>{tag}</Badge>)}
+          {tags.map((tag, idx) => <Badge key={idx} color={colors[getRandomPosition(colors.length)]}>{tag}</Badge>)}
         </PostTags>
       </PostInfo>
       <p>{postContent}</p>
