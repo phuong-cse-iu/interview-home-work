@@ -6,6 +6,7 @@ import errorReducer from './errorReducer';
 import postsReducer from './postsReducer';
 import filteredReducer from './filteredReducer';
 import userReducer from './userReducer';
+import commentsReducer from './commentsReducer';
 
 const persistConfig = {
   key: 'root',
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   postsData: postsReducer,
   filter: filteredReducer,
   user: userReducer,
+  comment: commentsReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

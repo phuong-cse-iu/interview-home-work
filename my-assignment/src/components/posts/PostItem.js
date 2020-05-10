@@ -2,8 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { Badge } from 'reactstrap';
 import colors from '../../constants/colors';
-// import users from '../../data/users.json';
-import comments from '../../data/comments.json';
+// import comments from '../../data/comments.json';
 import { formatDate } from '../../utils/date/dateTimeFormat';
 import getRandomPosition from '../../utils/number';
 import textEllipsis from '../../utils/text/textEllipsis';
@@ -43,7 +42,7 @@ const Author = styled.div``;
 
 const CreatedAt = styled.div``;
 
-export default ({ post, users }) => {
+export default ({ post, users, comments }) => {
   const { title, owner, content = '', created_at, tags } = post || {};
   const postContent = textEllipsis(content);
   const { username = '' } = users.find((user) => user.id === owner) || {};
@@ -65,7 +64,7 @@ export default ({ post, users }) => {
         </PostTags>
       </PostInfo>
       <p>{postContent}</p>
-      <Comment comments={postComments} />
+      <Comment comments={postComments} users={users} />
     </PostContainer>
   );
 };

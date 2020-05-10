@@ -1,33 +1,69 @@
 import React, { useState } from 'react';
 import { Button, Collapse } from 'reactstrap';
-import users from '../../data/users.json';
 import Comment from './Comment';
 import styled from '@emotion/styled';
+import AddCommentForm from './AddCommentForm';
 
 const CommentsContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export default ({ comments, ...props }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
-  const toggle = () => setIsOpen(!isOpen);
+const ToggleCommentsContainer = styled.div`
+  flex-basis: 95%;
+`;
+
+const ReplyContainer = styled.div`
+  flex-basis: 8%;
+`;
+
+const ReplyFormSection = styled.div`
+  padding: 12px 0;
+`;
+
+export default ({ comments, users = [], ...props }) => {
+  const [isCommentSectionOpen, setIsCommentSectionOpen] = useState(false);
+  const [isReplyFormOpen, setIsReplyFormOpen] = useState(false);
+
+  const toggleCommentsSection = () =>
+    setIsCommentSectionOpen(!isCommentSectionOpen);
+  const toggleReplyFormOpen = () =>
+    setIsReplyFormOpen(!isCommentSectionOpen && !isReplyFormOpen);
 
   return (
     <div>
-      <Button
-        size="sm"
-        color="primary"
-        outline
-        onClick={toggle}
-        style={{ marginBottom: '1rem' }}
-        disabled={comments.length === 0}
-      >
-        {comments.length} replies
-      </Button>
+      <ButtonsContainer>
+        <ToggleCommentsContainer>
+          <Button
+            size="sm"
+            color="primary"
+            outline
+            onClick={toggleCommentsSection}
+            style={{ marginBottom: '1rem' }}
+            disabled={comments.length === 0}
+          >
+            {comments.length} replies
+          </Button>
+        </ToggleCommentsContainer>
+        <ReplyContainer>
+          <Button
+            size="sm"
+            color="primary"
+            outline
+            onClick={toggleReplyFormOpen}
+            style={{ marginBottom: '1rem' }}
+          >
+            Reply
+          </Button>
+        </ReplyContainer>
+      </ButtonsContainer>
       <CommentsContainer>
-        <Collapse isOpen={isOpen}>
+        <Collapse isOpen={isCommentSectionOpen}>
           {comments.map(({ content, owner, id, created_at }, idx) => (
             <Comment
               key={id}
@@ -38,6 +74,11 @@ export default ({ comments, ...props }) => {
           ))}
         </Collapse>
       </CommentsContainer>
+      <ReplyFormSection>
+        <Collapse isOpen={isReplyFormOpen}>
+          <AddCommentForm  />
+        </Collapse>
+      </ReplyFormSection>
     </div>
   );
 };

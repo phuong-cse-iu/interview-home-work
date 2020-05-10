@@ -1,11 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Comments from '../../components/comments';
+import Comment from '../../components/comments';
+import { addComment } from '../../actions/comment';
 
-const CommentsContainer = ({...props}) => {
+const CommentsContainer = ({ addComment, users, ...props}) => {
     return (
-        <Comments />
+        <Comment addComment={addComment} users={users} />
     );
-}
+};
 
-export default connect(null, null)(CommentsContainer);
+const mapStateToProps = ({user}) => ({
+    users: user.users
+});
+
+const mapDispatchToProps = dispatch => ({
+    addComment: (comment) => dispatch(addComment(comment)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentsContainer);
