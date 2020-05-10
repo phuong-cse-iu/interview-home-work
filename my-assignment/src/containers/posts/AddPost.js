@@ -8,12 +8,13 @@ import idGenerator from '../../utils/id-generator';
 const isInvalidForm = (form) =>
   Object.values(form).some((value) => value === '');
 
-const AddPost = (props) => {
+const AddPost = ({user, addPost, setFormError, ...props}) => {
   const [form, setForm] = useState({
     title: '',
     content: '',
     tags: [],
     id: idGenerator(),
+    owner: user && user.currentUser && user.currentUser.googleId
   });
 
   const handleTagsInput = (tags) => {
@@ -23,10 +24,10 @@ const AddPost = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isInvalidForm(form)) {
-      props.setFormError({message: 'Form fields missing', color: 'danger'});
+      setFormError({message: 'Form fields missing', color: 'danger'});
     } else {
-      props.addPost(form);
-      props.setFormError({message: 'Add post successfully', color: 'success'});
+      addPost(form);
+      setFormError({message: 'Add post successfully', color: 'success'});
     }
     setForm({ title: '', content: '', tags: [] });
   };
@@ -47,9 +48,13 @@ const AddPost = (props) => {
   );
 };
 
+const mapStateToProps = ({user}) => ({
+  user
+});
+
 const mapDispatchToProps = (dispatch) => ({
   addPost: (post) => dispatch(addPost(post)),
   setFormError: ({message, color}) => dispatch(setFormError(message, color)),
 });
 
-export default connect(null, mapDispatchToProps)(AddPost);
+export default connect(mapStateToProps, mapDispatchToProps)(AddPost);

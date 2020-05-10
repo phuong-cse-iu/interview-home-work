@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
 import postsSaga from './postsSaga';
-import watchErrors from './errorSaga';
+import usersSaga from './usersSaga';
 
 export default function* rootSaga() {
-    yield all([postsSaga()]);
+    yield all([postsSaga(), usersSaga()]);
 }

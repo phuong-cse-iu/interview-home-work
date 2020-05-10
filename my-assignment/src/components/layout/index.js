@@ -1,6 +1,6 @@
 import React from 'react';
 import Footer from '../footer';
-import Header from '../header';
+import Header from '../../containers/header';
 import { Container, Row, Col } from 'reactstrap';
 import styled from '@emotion/styled';
 

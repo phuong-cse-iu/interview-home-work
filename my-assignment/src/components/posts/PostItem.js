@@ -2,10 +2,12 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { Badge } from 'reactstrap';
 import colors from '../../constants/colors';
-import users from '../../data/users.json';
+// import users from '../../data/users.json';
+import comments from '../../data/comments.json';
 import { formatDate } from '../../utils/date/dateTimeFormat';
 import getRandomPosition from '../../utils/number';
 import textEllipsis from '../../utils/text/textEllipsis';
+import Comment from '../comments';
 
 const PostTitle = styled.h4`
   text-align: center;
@@ -41,12 +43,11 @@ const Author = styled.div``;
 
 const CreatedAt = styled.div``;
 
-const findOwner = (id) => users.find((user) => user.id === id);
-
-export default ({ post }) => {
+export default ({ post, users }) => {
   const { title, owner, content = '', created_at, tags } = post || {};
   const postContent = textEllipsis(content);
-  const { username = '' } = findOwner(owner) || {};
+  const { username = '' } = users.find((user) => user.id === owner) || {};
+  const postComments = comments.filter((comment) => comment.post === post.id);
   return (
     <PostContainer>
       <PostTitle>{title}</PostTitle>
@@ -56,10 +57,15 @@ export default ({ post }) => {
           <CreatedAt>Created at: {formatDate(created_at)}</CreatedAt>
         </PostDetails>
         <PostTags>
-          {tags.map((tag, idx) => <Badge key={idx} color={colors[getRandomPosition(colors.length)]}>{tag}</Badge>)}
+          {tags.map((tag, idx) => (
+            <Badge key={idx} color={colors[getRandomPosition(colors.length)]}>
+              {tag}
+            </Badge>
+          ))}
         </PostTags>
       </PostInfo>
       <p>{postContent}</p>
+      <Comment comments={postComments} />
     </PostContainer>
   );
 };

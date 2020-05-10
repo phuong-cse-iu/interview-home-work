@@ -4,15 +4,16 @@ import { Button } from 'reactstrap';
 import Alert from '../../containers/alert';
 import ContentBlock from '../../components/content-block';
 import Posts from '../../components/posts';
-import { POST } from '../../constants';
+import { POST, USER } from '../../constants';
 import AddPost from '../../containers/posts/AddPost';
 import SearchBar from '../../containers/search-bar';
 
-const Home = ({ posts, fetchPosts, isLoading, error }) => {
+const Home = ({ posts, fetchPosts, fetchUsers, isLoading, error, user }) => {
   const [showAddForm, setShowAddForm] = useState(false);
 
   useEffect(() => {
     fetchPosts();
+    fetchUsers();
   }, []);
 
   const handleClick = (e) => setShowAddForm(!showAddForm);
@@ -27,12 +28,12 @@ const Home = ({ posts, fetchPosts, isLoading, error }) => {
         {showAddForm ? 'Hide form' : 'Click to add post'}
       </Button>
       {showAddForm && <AddPost />}
-      <Posts posts={posts} />
+      <Posts posts={posts} users={user.users} />
     </ContentBlock>
   );
 };
 
-const mapStateToProps = ({ isLoading, postsData, error, filter }) => ({
+const mapStateToProps = ({ isLoading, postsData, error, filter, user }) => ({
   isLoading,
   posts: filter
     ? postsData.posts.filter(
@@ -44,10 +45,12 @@ const mapStateToProps = ({ isLoading, postsData, error, filter }) => ({
       )
     : postsData.posts,
   error,
+  user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchPosts: () => dispatch({ type: POST.FETCH_POST }),
+  fetchUsers: () => dispatch({type: USER.FETCH_USERS}),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

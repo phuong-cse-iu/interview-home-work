@@ -5,18 +5,20 @@ import loadingReducer from './loadingReducer';
 import errorReducer from './errorReducer';
 import postsReducer from './postsReducer';
 import filteredReducer from './filteredReducer';
+import userReducer from './userReducer';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['postsData'],
+  whitelist: ['postsData', 'user'],
 }
 
 const rootReducer = combineReducers({
   isLoading: loadingReducer,
   error: errorReducer,
   postsData: postsReducer,
-  filter: filteredReducer
+  filter: filteredReducer,
+  user: userReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);
