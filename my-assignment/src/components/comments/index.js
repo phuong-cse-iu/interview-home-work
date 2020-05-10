@@ -36,13 +36,6 @@ export default ({ comments, ...props }) => {
               owner={users.find((user) => user.id === owner)}
             />
           ))}
-          {/* <Button
-            color="primary"
-            // onClick={toggle}
-            style={{ marginBottom: '1rem' }}
-          >
-            Response to post
-          </Button> */}
         </Collapse>
       </CommentsContainer>
     </div>
