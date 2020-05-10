@@ -7,7 +7,7 @@ export default ({ post, owner, ...props }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.addComment(form);
+    // props.addComment(form);
   };
 
   const handleChange = (e) => {
