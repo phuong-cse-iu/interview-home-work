@@ -4,13 +4,13 @@ import {connect} from 'react-redux';
 import {addComment} from '../../actions/comment';
 
 const AddCommentFormContainers = ({addComment, post, user, setIsReplyFormOpen, ...props }) => {
-  const [form, setForm] = useState({ content: '', owner: user.googleId, post: post.id });
+  const [form, setForm] = useState({ content: '', owner: user && user.googleId, post: post.id });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // props.addComment(form);
     addComment(form);
-    setForm({ content: '', owner: user.googleId, post: post.id });
+    setForm({ content: '', owner: user && user.googleId, post: post.id });
     setIsReplyFormOpen(false);
   };
 
