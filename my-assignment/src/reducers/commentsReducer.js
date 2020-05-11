@@ -7,7 +7,7 @@ const intialState = {
 export default (state = intialState, action) => {
   switch (action.type) {
     case COMMENT.ADD_COMMENT:
-      return null;
+      return {...state, comments: [...state.comments, action.comment]};
     case COMMENT.FETCH_COMMENT_SUCCESS:
       // Since we persist posts inside local storage, we need to de-duplicate comments that already exist
       const ids = new Set(state.comments.map((comment) => comment.id));

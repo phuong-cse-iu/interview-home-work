@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Collapse } from 'reactstrap';
 import Comment from './Comment';
 import styled from '@emotion/styled';
-import AddCommentForm from './AddCommentForm';
+import AddCommentForm from '../../containers/comments/AddCommentForm';
 
 const CommentsContainer = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ const ReplyFormSection = styled.div`
   padding: 12px 0;
 `;
 
-export default ({ comments, users = [], ...props }) => {
+export default ({ comments, users = [], post, owner, ...props }) => {
   const [isCommentSectionOpen, setIsCommentSectionOpen] = useState(false);
   const [isReplyFormOpen, setIsReplyFormOpen] = useState(false);
 
@@ -76,7 +76,7 @@ export default ({ comments, users = [], ...props }) => {
       </CommentsContainer>
       <ReplyFormSection>
         <Collapse isOpen={isReplyFormOpen}>
-          <AddCommentForm  />
+          <AddCommentForm post={post} owner={owner} setIsReplyFormOpen={setIsReplyFormOpen} /> 
         </Collapse>
       </ReplyFormSection>
     </div>

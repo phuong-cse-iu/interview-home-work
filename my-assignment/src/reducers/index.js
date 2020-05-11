@@ -11,7 +11,7 @@ import commentsReducer from './commentsReducer';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['postsData', 'user'],
+  whitelist: ['postsData', 'user', 'comment'],
 }
 
 const rootReducer = combineReducers({

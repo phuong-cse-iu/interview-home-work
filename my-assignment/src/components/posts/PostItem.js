@@ -64,7 +64,7 @@ export default ({ post, users, comments }) => {
         </PostTags>
       </PostInfo>
       <p>{postContent}</p>
-      <Comment comments={postComments} users={users} />
+      <Comment comments={postComments} users={users} post={post} owner={owner} />
     </PostContainer>
   );
 };
